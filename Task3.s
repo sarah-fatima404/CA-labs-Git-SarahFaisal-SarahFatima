@@ -1,21 +1,29 @@
 .text
 .globl main
 main:
-    li x20, 5    #a=5
-    add x21, x0, x0 #b=0+0
-    addi x20, x21, 32 #a=b+32
+li x10,10
+li x22, 0  #i
+li x23, 0 #sum
+li x11, 0x200 #array declaration 
+Loop:
+    slli x12, x22,2   # x12= i*4
+    add x12, x11, x12 # x12= base + offset
+    sw x22, 0(x12)  #a[i]=i
+    addi x22, x22, 1 #i++
+    bne x10, x22, Loop 
 
-    add x5, x20, x21 #x5=a+b
-    li x6, 5
-    sub x22, x5, x6 #d=(a+b)-5
-
-    sub x7, x20, x22 #x7=a-d
-    sub x8, x21, x20 #x8=b-a
-    add x9, x7, x8   #x9=(a-d)+(b-a)
-    add x23, x9, x22 # e = (((a- d) + (b- a)) + d)
-
-    add x23, x23, x5  #e=a+b+e
-    add x23, x23, x22 #e=a+b+d+e
+li x22,0 #i=0
+Loop2:
+    slli x12, x22,2   # x12= i*4
+    add x12, x11, x12 # x12= base + offset
+    lw x5, 0(x12)     # x5 the loads value temporarily
+    add x23, x5, x23  # x23=sum + a[i]
+    addi x22, x22, 1  #i++
+    bne x10, x22, Loop2 
 
 end:
-    j end
+    j end 
+    
+
+
+

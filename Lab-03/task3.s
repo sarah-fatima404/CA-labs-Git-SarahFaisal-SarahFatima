@@ -9,11 +9,10 @@ addi x27, x0, 5
 sw x24, 0x100(x0)
 sw x25, 0x104(x0)
 sw x27, 0x108(x0)
-
 addi, x10, x0, 0x100
 addi, x11, x0, 1
 jal x1, swap
-j exit 
+j exit
 
 swap:
 addi sp, sp, -12
@@ -30,9 +29,9 @@ lw x7, 4(x6)  #v[k+1]
 sw x7, 0(x6)   # v[k] = v[k+1]
 sw x5, 4(x6)   # v[k+1] = temp
 
-lw x6, 0(sp)
-lw x5, 4(sp)
-lw x7, 8(sp)
+lw x24, 0(sp)
+lw x25, 4(sp)
+lw x27, 8(sp)
 
 addi sp, sp, 12
 
